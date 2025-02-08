@@ -376,3 +376,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </body>
 
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catering Services</title>
+</head>
+<body>
+    <h1>Available Catering Services</h1>
+    <ul>
+        {% for service in services %}
+            <li>{{ service.name }} - ${{ service.price_per_person }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

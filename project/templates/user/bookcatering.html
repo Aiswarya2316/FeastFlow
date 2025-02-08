@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Catering</title>
+</head>
+<body>
+    <h1>Book Catering for {{ event.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="service">Select Catering Service:</label>
+        <select name="service" required>
+            {% for service in services %}
+                <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="guests">Number of Guests:</label>
+        <input type="number" name="guests" min="1" required><br><br>
+
+        <button type="submit">Book Catering</button>
+    </form>
+</body>
+</html>
