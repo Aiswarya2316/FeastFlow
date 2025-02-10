@@ -1,48 +1,63 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.db.models.fields import CharField
+from django.utils.translation import gettext_lazy as _
 
-class Event(models.Model):
-    name = models.CharField(max_length=200)
-    date = models.DateTimeField()
-    location = models.CharField(max_length=300)
-    description = models.TextField(blank=True)
+
+class userreg(models.Model):
+    email = models.EmailField(unique=True)
+    name = models.TextField()
+    phonenumber = models.IntegerField()
+    password = models.TextField()
+    location= models.TextField()
 
     def __str__(self):
         return self.name
 
-class CateringService(models.Model):
-    name = models.CharField(max_length=200)
+class servicereg(models.Model):
+    email = models.EmailField(unique=True)
+    name = models.TextField()
+    phonenumber = models.IntegerField()
+    password = models.TextField()
+    location= models.TextField()
+
+    def __str__(self):
+        return self.name
+    
+
+    
+class Product(models.Model):
+    service = models.ForeignKey(servicereg,on_delete=models.CASCADE)
+    name = models.TextField()
     description = models.TextField()
-    price_per_person = models.DecimalField(max_digits=10, decimal_places=2)
-    available_from = models.DateField()
-    available_to = models.DateField()
+    price = models.IntegerField()
+    quantity = models.IntegerField()
+    offerprice = models.IntegerField()
+    image = models.FileField()
+
 
     def __str__(self):
         return self.name
+    
 
 class Booking(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    catering_service = models.ForeignKey(CateringService, on_delete=models.CASCADE)
-    number_of_guests = models.PositiveIntegerField()
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    booking_date = models.DateTimeField(default=datetime.now)
-    status = models.CharField(max_length=100, choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Completed', 'Completed')], default='Pending')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    user = models.ForeignKey(userreg,on_delete=models.CASCADE)
+    date_of_buying = models.TextField()
+    quantity = models.IntegerField()
+    price = models.IntegerField()
 
+     # New field for delivery status
+    DELIVERY_STATUS_CHOICES = [
+        ("Pending", "Pending"),
+        ("Shipped", "Shipped"),
+        ("In Transit", "In Transit"),
+        ("Delivered", "Delivered"),
+    ]
+    delivery_status = models.CharField(
+        max_length=20, choices=DELIVERY_STATUS_CHOICES, default="Pending"
+    )
+
+    # Optional: define a string representation for clarity in admin
     def __str__(self):
-        return f"{self.customer.username} - {self.event.name} - {self.status}"
-
-    def calculate_total_cost(self):
-        self.total_cost = self.number_of_guests * self.catering_service.price_per_person
-        self.save()
-
-class Payment(models.Model):
-    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
-    amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_date = models.DateTimeField(auto_now_add=True)
-    payment_method = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f"Payment for {self.booking.event.name} by {self.booking.customer.username}"
-
+        return f"{self.product.name} - {self.delivery_status}"

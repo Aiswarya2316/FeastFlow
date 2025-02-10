@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -9,20 +10,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo.png' %}">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -41,34 +42,18 @@
                             <div class="main-menu d-none d-lg-block">
                                 <nav>
                                     <ul class="mein_menu_list" id="navigation">
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="service.html">Services</a></li>
-                                        <li><a href="menu.html">menu</a></li>
-                                        <li><a href="gallery.html">gallery</a></li>
-                                        <div class="logo-img d-none d-lg-block">
-                                                <a href="index.html">
-                                                    <img src="img/logo.png" alt="">
-                                                </a>
-                                            </div>
-                                        <li><a href="#">blog <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">blog</a></li>
-                                                <li><a href="single-blog.html">single-blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="elements.html">elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="../about">About</a></li>
+                                        <li><a href="../service">Services</a></li>
+                                        <li><a href="../menu">menu</a></li>
+                                        <li><a href="../gallery">gallery</a></li>
+                                        <li><a href="../contact">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                             <div class="custom_order">
-                                <a href="#" class="boxed_btn_white">Custom Order</a>
+                                <a href="../orderdetails" class="boxed_btn_white">Custom Order</a>
                             </div>
                         </div>
                         <div class="col-12">
@@ -76,7 +61,7 @@
                         </div>
                         <div class="logo-img-small d-sm-block d-md-block d-lg-none">
                                 <a href="index.html">
-                                    <img src="img/logo.png" alt="">
+                                    <img src="{% static 'img/logo.png' %}" alt="">
                                 </a>
                             </div>
                     </div>
@@ -112,7 +97,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-1.png" alt="">
+                            <img src="{% static 'img/order/order-1.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -130,7 +115,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-2.png" alt="">
+                            <img src="{% static 'img/order/order-2.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -148,7 +133,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-3.png" alt="">
+                            <img src="{% static 'img/order/order-3.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -166,7 +151,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-4.png" alt="">
+                            <img src="{% static 'img/order/order-4.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -184,7 +169,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-5.png" alt="">
+                            <img src="{% static 'img/order/order-5.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -202,7 +187,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="single_order">
                         <div class="order_thumb">
-                            <img src="img/order/order-6.png" alt="">
+                            <img src="{% static 'img/order/order-6.png' %}" alt="">
                             <div class="order_prise">
                                 <span>10.00</span>
                             </div>
@@ -322,32 +307,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
 
-    <script src="js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 
