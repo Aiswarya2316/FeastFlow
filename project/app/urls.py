@@ -1,21 +1,50 @@
 from django.urls import path
 from . import views
-
 urlpatterns = [
 path('',views.login),
-path('logout/',views.logout,name='logout'),
-path('userreg/',views.userregister,name='userreg'),
-path('servicereg/',views.serviceregister,name='servicereg'),
-path('userhome/',views.userhome,name='userhome'),
-path('adminhome/',views.adminhome,name='adminhome'),
-path('servicehome/',views.servicehome,name='servicehome'),
-path('about/',views.about,name='about'),
-path('contact/',views.contact,name='contact'),
-path('menu/',views.menu,name='menu'),
-path('service/',views.service,name='service'),
-path('gallery/',views.gallery,name='gallery'),
-path('adddishes/',views.adddishes,name='adddishes'),
-path('viewdishes/',views.viewdishes,name='viewdishes'),
-path('editdishes/<int:id>',views.editdishes,name='editdishes'),
-path('deletedishes/<int:id>',views.deletedishes,name='deletedishes'),
+path('logout/',views.logout),
+path('register/',views.register),
+path('shopregister/',views.shopregister),
+path('userhome/',views.userhome),
+path('adminhome/',views.adminhome),
+path('shophome/',views.shophome),
+path('deliveryhome/',views.deliverys),
+path('addpro/',views.addpro),
+path('viewpro/',views.viewpro),
+path('edit/<int:id>',views.edit),
+path('delete/<int:id>',views.delete),
+path('profile/',views.profile),
+path('upload/',views.upload),
+path('userviewproduct/',views.userviewproduct),
+path('prodetails/<int:id>',views.prodetails),
+path('shopprodetails/<int:id>',views.shopprodetails),
+path('addtocart/<int:id>',views.user_cart),
+path('user_view_cart/',views.user_view_cart),
+path('qty_incri/<int:id>',views.qty_incri),
+path('qty_decri/<int:id>',views.qty_decri),
+path('buynow1/<int:id>',views.buynow1),
+path('buynow/<int:id>',views.buynow),
+path('deleteitem/<int:id>',views.deleteitem),
+path('orderdetails/',views.orderdetails),
+path('delregister/',views.delregister),
+path('viewshop/',views.viewshop),
+path('aboutus/',views.aboutus),
+path('contact/',views.contact),
+path('service/',views.service),
+path('bookinghistry/',views.bookinghistry),
+path('search/', views.product_search, name='product_search'),
+path("payment/<int:id>", views.order_payment, name="payment"),
+path("razorpay/callback/", views.callback, name="callback"),
+# path('submit_feedback/', views.submit_feedback, name='submit_feedback'),
+# path('feedback_list/', views.feedback_list, name='feedback_list'),
+
+
+
+
+
+
+
+
+
+
 ]
