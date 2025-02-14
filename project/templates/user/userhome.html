@@ -559,9 +559,9 @@ h2 {
 </head>
 <body>
 
-  <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark  sticky-top">
+  <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
-      <a href="../userhome" class="navbar-brand">
+      <a href="../userhome" class="logo">
         <img src="../static/images.jpg" alt="logo" width="80px">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -576,43 +576,60 @@ h2 {
             <a class="nav-link" href="../userviewproduct">View Product</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../orderdetails">Order Details</a>
+            <a class="nav-link" href="../orderdetails">Orderdetails</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../aboutus">About Us</a>
+            <a class="nav-link" href="../booking-history">My Bookings</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../service">Service</a>
-          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../aboutus">Aboutus</a>
+        </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../service">Service</a>
+      </li>
           <li class="nav-item">
             <a class="nav-link" href="../logout">Logout</a>
           </li>
         </ul>
-        <ul class="navbar-nav d-flex align-items-center">
+        
+  
+         <!-- Social Media Icons -->
+         <ul class="navbar-nav d-flex">
+          <!-- Twitter Icon -->
           <li class="nav-item">
             <a class="nav-link" href="../user_view_cart" target="_blank">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </li>
+          
+          <!-- Facebook Icon -->
           <li class="nav-item">
             <a class="nav-link" href="https://facebook.com" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
+          
+          <!-- Instagram Icon -->
           <li class="nav-item">
             <a class="nav-link" href="https://instagram.com" target="_blank">
               <i class="fab fa-instagram"></i>
             </a>
           </li>
         </ul>
-        <form class="d-flex" method="get" action="{% url 'product_search' %}">
-          {% csrf_token %}
-          <input type="text" class="form-control me-2" name="query" placeholder="Search for products...">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+  
+  
+    <form class="d-flex" method="post" action="{% url 'product_search' %}">
+      {% csrf_token %}
+      <input type="text" class="form-control me-2" name="query" placeholder="Search for products...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  
       </div>
     </div>
   </nav>
+  
   
 
 <!-- Carousel -->

@@ -125,6 +125,10 @@ def shopregister(req):
     print(shopregister)
 
 
+def homes(req):
+    return render(req,'home.html')
+
+
 def userhome(req):
     if 'user' in req.session:
         data = Product.objects.all().order_by('-shop')[:6]
@@ -383,29 +387,7 @@ def product_search(request):
 def home(request):
     return render(request, "user/payment.html")
 
-# def order_payment(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         amount = request.POST.get("amount")
-#         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-#         razorpay_order = client.order.create(
-#             {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
-#         )
-#         order_id=razorpay_order['id']
-#         order = Order.objects.create(
-#             name=name, amount=amount, provider_order_id=order_id
-#         )
-#         order.save()
-#         return render(
-#             request,
-#             "user/payment.html",
-#             {
-#                 "callback_url": "http://" + "127.0.0.1:8000" + "razorpay/callback",
-#                 "razorpay_key": settings.RAZORPAY_KEY_ID,
-#                 "order": order,
-#             },
-#         )
-#     return render(request, "user/payment.html")
+
 
 def order_payment(request, id):
     # Fetch the product based on product_id
@@ -434,53 +416,75 @@ def order_payment(request, id):
         order.save()
 
         return render(
-            request,
-            "user/payment.html",
-            {
-                "callback_url": "http://" + "127.0.0.1:8000" + "/razorpay/callback",
-                "razorpay_key": settings.RAZORPAY_KEY_ID,
-                "order": order,
-                "product": product,  # Pass product data to the template
-            },
-        )
+                request,
+                "user/payment.html",
+                {
+                    "callback_url": "http://" + "127.0.0.1:8000" + "/razorpay/callback/",  # Add trailing slash
+                    "razorpay_key": settings.RAZORPAY_KEY_ID,
+                    "order": order,
+                    "product": product,  
+                },
+            )
+
     # return render(request, "user/payment.html", {"product": product})
-
-
-
-
 @csrf_exempt
 def callback(request):
     def verify_signature(response_data):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-        return client.utility.verify_payment_signature(response_data)
+        try:
+            client.utility.verify_payment_signature(response_data)
+            return True  # Signature is valid
+        except razorpay.errors.SignatureVerificationError:
+            return False  # Signature is invalid
 
     if "razorpay_signature" in request.POST:
         payment_id = request.POST.get("razorpay_payment_id", "")
         provider_order_id = request.POST.get("razorpay_order_id", "")
         signature_id = request.POST.get("razorpay_signature", "")
-        order = Order.objects.get(provider_order_id=provider_order_id)
+        
+        # Fetch the order from the database
+        try:
+            order = Order.objects.get(provider_order_id=provider_order_id)
+        except Order.DoesNotExist:
+            return render(request, "callback.html", context={"status": "FAILURE", "message": "Order not found."})
+
         order.payment_id = payment_id
         order.signature_id = signature_id
-        order.save()
-        if not verify_signature(request.POST):
-            order.status = PaymentStatus.SUCCESS
-            order.save()
-            return render(request, "callback.html", context={"status": order.status})   # callback giving html page
-            #  or  return redirect(function name of callback giving html page)
+
+        # Correct the signature verification check
+        if verify_signature(request.POST):  # ✅ Corrected Condition
+            order.status = "SUCCESS"  # ✅ Ensure it's stored as a string
         else:
-            order.status = PaymentStatus.FAILURE
-            order.save()
-            return render(request, "callback.html", context={"status": order.status})  # callback giving html page
-            #  or  return redirect(function name of callback giving html page)
+            order.status = "FAILURE"
+
+        order.save()
+        print("Order status:", order.status)  # Debugging statement
+        return render(request, "callback.html", context={"status": order.status})  # ✅ Fixed
 
     else:
-        payment_id = json.loads(request.POST.get("error[metadata]")).get("payment_id")
-        provider_order_id = json.loads(request.POST.get("error[metadata]")).get(
-            "order_id"
-        )
-        order = Order.objects.get(provider_order_id=provider_order_id)
-        order.payment_id = payment_id
-        order.status = PaymentStatus.FAILURE
-        order.save()
-        return render(request, "callback.html", context={"status": order.status})  # callback giving html page
-        #  or  return redirect(function name of callback giving html page)
+        try:
+            error_metadata = json.loads(request.POST.get("error[metadata]", "{}"))
+            payment_id = error_metadata.get("payment_id", "")
+            provider_order_id = error_metadata.get("order_id", "")
+            
+            order = Order.objects.get(provider_order_id=provider_order_id)
+            order.payment_id = payment_id
+            order.status = "FAILURE"
+            order.save()
+        except (Order.DoesNotExist, json.JSONDecodeError):
+            return render(request, "callback.html", context={"status": "FAILURE", "message": "Order not found or invalid error data."})
+
+        return render(request, "callback.html", context={"status": order.status})  # ✅ Fixed
+
+
+from django.shortcuts import render
+from .models import Order
+
+def booking_history(request):
+    user = request.user  # Assuming user is logged in
+    successful_orders = Order.objects.filter(status="SUCCESS")
+    print(successful_orders) 
+    return render(request, "user/booking_history.html", {"orders": successful_orders})
+
+
+

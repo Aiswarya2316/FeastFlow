@@ -143,4 +143,12 @@ class Order(models.Model):
         return f"{self.id}-{self.name}-{self.status}"
 
 
+from django.shortcuts import render
+from .models import Order
+
+def booking_history(request):
+    user = request.user  # Assuming user is logged in
+    successful_orders = Order.objects.filter(status="SUCCESS", name=user.username)  # Fetch only paid orders
+
+    return render(request, "user/booking_history.html", {"orders": successful_orders})
 

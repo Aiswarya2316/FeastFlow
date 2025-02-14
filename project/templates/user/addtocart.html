@@ -46,9 +46,9 @@
 </style>
 </head>
 <body>
-  <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+  <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
-      <a href="../userhome" class="logo"  >
+      <a href="../userhome" class="logo">
         <img src="../static/images.jpg" alt="logo" width="80px">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -65,6 +65,9 @@
           <li class="nav-item">
             <a class="nav-link" href="../orderdetails">Orderdetails</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../booking-history">My Bookings</a>
+          </li>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../aboutus">Aboutus</a>
@@ -80,7 +83,7 @@
         
   
          <!-- Social Media Icons -->
-         <ul class="navbar-nav d-flex align-items-center">
+         <ul class="navbar-nav d-flex">
           <!-- Twitter Icon -->
           <li class="nav-item">
             <a class="nav-link" href="../user_view_cart" target="_blank">
@@ -113,6 +116,7 @@
       </div>
     </div>
   </nav>
+  
   
      {% for i in data %}
          <div class="card mb-4">

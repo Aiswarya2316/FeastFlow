@@ -112,26 +112,67 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
-          <li class="nav-item"><a class="nav-link" href="../userviewproduct">View Product</a></li>
-          <li class="nav-item"><a class="nav-link" href="../orderdetails">Order Details</a></li>
-          <li class="nav-item"><a class="nav-link" href="../aboutus">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="../service">Service</a></li>
-          <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../userviewproduct">View Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../orderdetails">Orderdetails</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" class="nav-link" href="../booking-history">My Bookings</a>
+          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../aboutus">Aboutus</a>
+        </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../service">Service</a>
+      </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../logout">Logout</a>
+          </li>
         </ul>
-        <ul class="navbar-nav d-flex">
-          <li class="nav-item"><a class="nav-link" href="../user_view_cart" target="_blank"><i class="fas fa-shopping-cart"></i></a></li>
-          <li class="nav-item"><a class="nav-link" href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="nav-item"><a class="nav-link" href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        
+  
+         <!-- Social Media Icons -->
+         <ul class="navbar-nav d-flex">
+          <!-- Twitter Icon -->
+          <li class="nav-item">
+            <a class="nav-link" href="../user_view_cart" target="_blank">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </li>
+          
+          <!-- Facebook Icon -->
+          <li class="nav-item">
+            <a class="nav-link" href="https://facebook.com" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          
+          <!-- Instagram Icon -->
+          <li class="nav-item">
+            <a class="nav-link" href="https://instagram.com" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
         </ul>
-        <form class="d-flex" method="post" action="{% url 'product_search' %}">
-          {% csrf_token %}
-          <input type="text" class="form-control me-2" name="query" placeholder="Search for products...">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+  
+  
+    <form class="d-flex" method="post" action="{% url 'product_search' %}">
+      {% csrf_token %}
+      <input type="text" class="form-control me-2" name="query" placeholder="Search for products...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  
       </div>
     </div>
   </nav>
+  
 
   <div class="container">
     <h3 class="text-center">Products</h3>
