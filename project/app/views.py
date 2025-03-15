@@ -168,8 +168,12 @@ def addpro(req):
     
 def viewpro(req):
     if 'shop' in req.session:
-        data=Product.objects.filter(shop=get_shop(req))
-        return render(req,'shop/viewpro.html',{'data':data})    
+        data = Product.objects.filter(shop=get_shop(req))
+        return render(req, 'shop/viewpro.html', {'data': data})  
+    
+    # Redirect to login page or show a message if shop is not in session
+    messages.warning(req, "You must be logged in to view products.")
+    return redirect("login")   
 
 def edit(req,id):
     data=Product.objects.get(pk=id)
